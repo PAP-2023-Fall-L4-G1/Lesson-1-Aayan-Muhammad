@@ -6,6 +6,10 @@
 5. Also, select the game over div by its id and assign it a variable.
 */
 
+let score = 0;
+const firefly = document.querySelector('#firefly');
+const scoreText = document.querySelector('#score');
+
 /* Exercise 2 - CSS Review
 1. In style.css, select the game over div by its id and hide it using the display property.
 */
