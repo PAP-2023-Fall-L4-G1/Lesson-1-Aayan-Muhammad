@@ -7,8 +7,18 @@
 */
 
 let score = 0;
+
 const firefly = document.querySelector('#firefly');
+
 const scoreText = document.querySelector('#score');
+
+const gameoverText = document.querySelector('#game-over');
+
+const imageArray = ["firefly-1.png", "firefly-2.png", "firefly-3.png"];
+
+console.log(firefly);
+
+
 
 /* Exercise 2 - CSS Review
 1. In style.css, select the game over div by its id and hide it using the display property.
@@ -19,7 +29,13 @@ const scoreText = document.querySelector('#score');
 Inside scoring, increase the score by one and show the new score on the screen 
 * Hint: Remember from Exercise 1, we already have variables for storing the score, the score element, and the firefly element.
 2. To call the function, add a click event listener to the firefly. */
+function scoring(){
+    score += 1;
 
+    scoreText.innerHTML = score;
+}
+
+firefly.addEventListener('click', scoring);
 
 
 /* Exercise 4 - Style property, generating random numbers
@@ -35,12 +51,33 @@ Set its value to a template literal. Insert the random numbers as values of the 
 6. Call the function
 */
 
+const fireflyArray= ["firefly-1.png", "firefly-2.png", "firefly-3.png" ]
+
+function flyFirefly(){
+    let randomNumTop = Math.random()*600;
+
+    let randomNumLeft = Math.random()*1200;
+
+    let randomNumber = Math.floor(Math.random()*3);
+
+    const randomImage = imageArray[randomNumber];
+
+    let newPosition = `top: ${randomNumTop}px; left: ${randomNumLeft}px`;
+
+    firefly.style.cssText = newPosition;
+
+    firefly.src = randomImage;
+}
 
 
 /* Exercise 5 - Timing functions 
 1. Edit the function call in the last exercise to call function flyFirefly using setInterval every 1000 milliseconds
 2. Assign the function call a variable called interval 
 */
+let interval = setInterval(flyFirefly, 1000)
+
+flyFirefly();
+
 
 
 /* Exercie 6
@@ -51,7 +88,14 @@ Inside the function:
 4. Use the style property to set display to block on the game over div
 5. Call function end using setTimeout() at 60000 milliseconds
 */
+function end(){
+    clearInterval(interval);
 
+    firefly.removeEventListener('click', scoring);
+
+    gameoverText.style.display = "block";
+}
+setTimeout(end, 60000);
 /* ********************************************************
 Practice Session ******************************************
 
@@ -62,8 +106,12 @@ Make the firefly picture change every time the firefly moves.
  - Round hte number down using Math.floor()
  - Select one of the firefly images from the array using the random number
  - Use the src property to set the new picture.
- 
+
+
+
+
  Bonus points:
  Show a game timer counting down the number of seconds left to play.
  Rotate the firefly picture when it moves.
  */
+
